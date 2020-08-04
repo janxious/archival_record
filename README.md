@@ -1,8 +1,5 @@
 # ArchivalRecord
 
-[![Build Status](https://travis-ci.org/janxious/archival_record.svg?branch=main)](https://travis-ci.org/janxious/archival_record)
-[![Gem Version](https://badge.fury.io/rb/archival_record.svg)](https://badge.fury.io/rb/archival_record)
-
 Atomically archive object trees in your ActiveRecord models.
 
 `acts_as_paranoid` and similar plugins/gems work on a record-by-record basis and made it difficult to restore records atomically (or archive them, for that matter).
