@@ -10,15 +10,11 @@ before_script:
   - bundle install --gemfile=gemfiles/rails_5.1.gemfile
   - bundle install --gemfile=gemfiles/rails_5.2.gemfile
   - bundle install --gemfile=gemfiles/rails_6.0.gemfile
-                             
-test:                        
-  script:                    
-    - bundle exec rake test  
-                             
-rubocop:                     
-  script:                    
-    - bundle exec rubocop    
-                             
-appraisal:                   
-  script:                    
+
+rake:
+  script:
+    - bundle exec rake
+
+appraisal:
+  script:
     - bundle exec appraisal rake
