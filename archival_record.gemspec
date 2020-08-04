@@ -22,7 +22,7 @@ Gem::Specification.new do |gem|
                      "Sergey Gnuskov",
                      "Elijah Miller"]
   gem.email       = ["joel.meador+archival_record@gmail.com"]
-  gem.homepage    = "http://github.com/janxious/archival_record"
+  gem.homepage    = "https://gitlab.com/joelmeador/archival_record/"
 
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
