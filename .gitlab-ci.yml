@@ -1,4 +1,4 @@
-image: "ruby:2.7"
+image: "ruby:3.2"
 
 before_script:
   - apt-get update -qq && apt-get install -y -qq sqlite3 libsqlite3-dev nodejs
@@ -6,10 +6,10 @@ before_script:
   - which ruby
   - gem install bundler --no-document
   - bundle install --jobs $(nproc)  "${FLAGS[@]}"
-  - bundle install --gemfile=gemfiles/rails_5.0.gemfile
-  - bundle install --gemfile=gemfiles/rails_5.1.gemfile
-  - bundle install --gemfile=gemfiles/rails_5.2.gemfile
   - bundle install --gemfile=gemfiles/rails_6.0.gemfile
+  - bundle install --gemfile=gemfiles/rails_6.1.gemfile
+  - bundle install --gemfile=gemfiles/rails_7.0.gemfile
+  - bundle install --gemfile=gemfiles/rails_7.1.gemfile
 
 rake:
   script:
