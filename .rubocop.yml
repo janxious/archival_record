@@ -1,10 +1,13 @@
 inherit_from: .rubocop_todo.yml
+require:
+  - rubocop-rails
+  - rubocop-rake
 
 AllCops:
   Exclude:
     - vendor/**/*
     - gemfiles/**/*
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 3.0
   NewCops: enable
 
 

@@ -9,11 +9,11 @@ require "archival_record_core/archival_record_active_record_methods"
 
 # This assumes a fully Rails 5 compatible set of ActiveRecord models
 if defined?(ApplicationRecord)
-  ApplicationRecord.send :include, ArchivalRecordCore::ArchivalRecord
-  ApplicationRecord.send :include, ArchivalRecordCore::ArchivalRecordActiveRecordMethods
+  ApplicationRecord.include ArchivalRecordCore::ArchivalRecord
+  ApplicationRecord.include ArchivalRecordCore::ArchivalRecordActiveRecordMethods
 else
-  ActiveRecord::Base.send :include, ArchivalRecordCore::ArchivalRecord
-  ActiveRecord::Base.send :include, ArchivalRecordCore::ArchivalRecordActiveRecordMethods
+  ActiveSupport.on_load(:active_record) { include ArchivalRecordCore::ArchivalRecord }
+  ActiveSupport.on_load(:active_record) { include ArchivalRecordCore::ArchivalRecordActiveRecordMethods }
 end
 
-ActiveRecord::Relation.send :include, ArchivalRecordCore::ArchivalRecordActiveRecordMethods::ARRelationMethods
+ActiveRecord::Relation.include ArchivalRecordCore::ArchivalRecordActiveRecordMethods::ARRelationMethods

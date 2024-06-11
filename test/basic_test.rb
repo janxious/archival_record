@@ -9,7 +9,7 @@ class BasicTest < ActiveSupport::TestCase
   end
 
   test "unarchive unarchives archival records" do
-    archival = Archival.create!(archived_at: Time.now, archive_number: 1)
+    archival = Archival.create!(archived_at: Time.now.utc, archive_number: 1)
     archival.unarchive!
     assert_equal false, archival.reload.archived?
   end
@@ -26,23 +26,23 @@ class BasicTest < ActiveSupport::TestCase
   end
 
   test "unarchive returns true on success" do
-    normal = Archival.create!(archived_at: Time.now, archive_number: "1")
+    normal = Archival.create!(archived_at: Time.now.utc, archive_number: "1")
     assert_equal true, normal.unarchive!
   end
 
   test "unarchive returns false on failure" do
-    readonly = Archival.create!(archived_at: Time.now, archive_number: "1")
+    readonly = Archival.create!(archived_at: Time.now.utc, archive_number: "1")
     readonly.readonly!
     assert_equal false, readonly.unarchive!
   end
 
   test "archive sets archived_at to the time of archiving" do
     archival = Archival.create!
-    before = DateTime.now
+    before = DateTime.now.utc
     sleep(0.001)
     archival.archive!
     sleep(0.001)
-    after = DateTime.now
+    after = DateTime.now.utc
     assert before < archival.archived_at.to_datetime
     assert after > archival.archived_at.to_datetime
   end

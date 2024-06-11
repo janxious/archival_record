@@ -3,13 +3,13 @@ module ArchivalRecordCore
 
     require "digest/md5"
 
-    unless defined?(MissingArchivalColumnError) == "constant" && MissingArchivalColumnError.class == Class
+    unless defined?(MissingArchivalColumnError) == "constant" && MissingArchivalColumnError.instance_of?(Class)
       MissingArchivalColumnError = Class.new(ActiveRecord::ActiveRecordError)
     end
-    unless defined?(CouldNotArchiveError) == "constant" && CouldNotArchiveError.class == Class
+    unless defined?(CouldNotArchiveError) == "constant" && CouldNotArchiveError.instance_of?(Class)
       CouldNotArchiveError = Class.new(ActiveRecord::ActiveRecordError)
     end
-    unless defined?(CouldNotUnarchiveError) == "constant" && CouldNotUnarchiveError.class == Class
+    unless defined?(CouldNotUnarchiveError) == "constant" && CouldNotUnarchiveError.instance_of?(Class)
       CouldNotUnarchiveError = Class.new(ActiveRecord::ActiveRecordError)
     end
 
@@ -33,7 +33,7 @@ module ArchivalRecordCore
 
       # Deprecated: Please use `archival_record` instead
       def acts_as_archival(options = {})
-        ActiveSupport::Deprecation.warn("`acts_as_archival` is deprecated.  Please use `archival_record` instead.")
+        ActiveSupport::Deprecation.new("3.0", "ArchivalRecord")
         archival_record(options)
       end
 
@@ -73,6 +73,12 @@ module ArchivalRecordCore
       private def define_callback_dsl_method(callbackable_type, action)
         # rubocop:disable Security/Eval
         eval <<-END_CALLBACKS, binding, __FILE__, __LINE__ + 1
+          # unless defined?(before_archive)
+          #   def before_archive(*args, &blk)
+          #     set_callback(:archive, :before, *args, &blk)
+          #   end
+          # end
+
           unless defined?(#{callbackable_type}_#{action})
             def #{callbackable_type}_#{action}(*args, &blk)
               set_callback(:#{action}, :#{callbackable_type}, *args, &blk)
@@ -138,18 +144,14 @@ module ArchivalRecordCore
         AssociationOperation::Unarchive.new(self, head_archive_number).execute
       end
 
-      private def execute_archival_action(action)
+      private def execute_archival_action(action, &block)
+        execution_result = false
         self.class.transaction do
-          # rubocop: disable Style/RescueStandardError
-          begin
-            success = run_callbacks(action) { yield }
-            return !!success
-          rescue => e
-            handle_archival_action_exception(e)
-          end
-          # rubocop: enable Style/RescueStandardError
+          execution_result = !!run_callbacks(action, &block)
+        rescue StandardError => e
+          handle_archival_action_exception(e)
         end
-        false
+        execution_result
       end
 
       private def handle_archival_action_exception(exception)
