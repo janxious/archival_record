@@ -11,8 +11,10 @@ module ArchivalRecordCore
         end
 
         def execute
+          return unless model.archive_dependents?
+
           each_archivable_association do |association|
-            act_on_association(association) if association_conditions_met? association
+            act_on_association(association) if association_conditions_met?(association)
           end
         end
 

@@ -14,6 +14,7 @@ module ArchivalRecordCore
     end
 
     def self.included(base)
+      super
       base.extend ActMethods
     end
 
@@ -23,6 +24,8 @@ module ArchivalRecordCore
         return if included_modules.include?(InstanceMethods)
 
         include InstanceMethods
+
+        setup_options(options)
 
         setup_validations(options)
 
@@ -35,6 +38,13 @@ module ArchivalRecordCore
       def acts_as_archival(options = {})
         ActiveSupport::Deprecation.new("3.0", "ArchivalRecord")
         archival_record(options)
+      end
+
+      private def setup_options(options)
+        default_options = { readonly_when_archived: false, archive_dependents: true }
+        options.reverse_merge!(default_options)
+
+        define_method(:archive_dependents?) { options[:archive_dependents] }
       end
 
       private def setup_validations(options)

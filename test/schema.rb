@@ -93,4 +93,26 @@ ActiveRecord::Schema.define(version: 1) do
     t.column :archive_number, :string
     t.column :archived_at, :datetime
   end
+
+  create_table :ignore_dependents_archivals, force: true do |t|
+    t.column :archive_number, :string
+    t.column :archived_at, :datetime
+  end
+
+  create_table :ignorable_dependents, force: true do |t|
+    t.column :ignore_dependents_archival_id, :integer
+    t.column :archive_number, :string
+    t.column :archived_at, :datetime
+  end
+
+  create_table :explicit_act_on_dependents_archivals, force: true do |t|
+    t.column :archive_number, :string
+    t.column :archived_at, :datetime
+  end
+
+  create_table :nonignorable_dependents, force: true do |t|
+    t.column :explicit_act_on_dependents_archival_id, :integer
+    t.column :archive_number, :string
+    t.column :archived_at, :datetime
+  end
 end

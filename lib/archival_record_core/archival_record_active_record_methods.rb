@@ -2,6 +2,7 @@ module ArchivalRecordCore
   module ArchivalRecordActiveRecordMethods
 
     def self.included(base)
+      super
       base.extend ARClassMethods
       base.send :include, ARInstanceMethods
     end
