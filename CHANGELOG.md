@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 3.0.0 - June 10, 2024
+* **BREAKING CHANGE** Drop support for rails 5 - see `rails__4.x-and-5.x` branch for relevant code
+* **BREAKING CHANGE** Drop support for Ruby 2.x
+* **ADDED** new option for `archival_record` called `archive_dependents` which can control whether `dependent: :destroy` records are archived with their parent
+* lots of cleanup of code, particularly the way `ApplicationRecord` gets patched
+* remove travis-ci, use gitlab pipelines
+
+## 2.0.2 - August 4, 2020
+* fixing travis
+* updating git hosting link
+
 ## 2.0.1 - August 3, 2020
 * Add security policy
 * Update depenedent gems: archival_record (:D oops) and rubocop, and dependencies
