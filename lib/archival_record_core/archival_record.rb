@@ -166,8 +166,8 @@ module ArchivalRecordCore
       end
 
       private def handle_archival_action_exception(exception)
-        ActiveRecord::Base.logger.try(:debug, exception.message)
-        ActiveRecord::Base.logger.try(:debug, exception.backtrace)
+        ActiveRecord::Base.logger.try(:error, exception.message)
+        ActiveRecord::Base.logger.try(:error, exception.backtrace)
         raise(ActiveRecord::Rollback)
       end
 

@@ -68,6 +68,7 @@ BASE_FIXTURE_CLASSES = %I[
   ignorable_dependent
   explicit_act_on_dependents_archival
   nonignorable_dependent
+  bogus_relation
 ].freeze
 
 RAILS_4_FIXTURE_CLASSES = %I[
