@@ -8,6 +8,8 @@ Because the `#archive!` and `#unarchive!` methods are in transactions, and every
 
 Additionally, other plugins generally change how `destroy`/`delete` work. ArchivalRecord does not, and thus one can destroy records like normal.
 
+_This is a fork of [ActsAsArchival](https://github.com/expectedbehavior/acts_as_archival/)._
+
 ## Maintenance
 
 You might read the commit logs and think "This must be abandonware! This hasn't been updated in 2y!" But! This is a mature project that solves a specific problem in ActiveRecord. It tends to only be updated when a new major version of ActiveRecord comes out and hence the infrequent updates.
@@ -29,12 +31,12 @@ _If you're stuck on Rails 4.0x/3x/2x, check out the older tags/branches, which a
 ## Example
 
 ``` ruby
-class Hole < ActiveRecord::Base
+class Hole < ApplicationRecord
   archival_record
   has_many :rats, dependent: :destroy
 end
 
-class Rat < ActiveRecord::Base
+class Rat < ApplicationRecord
   archival_record
 end
 ```
@@ -109,12 +111,13 @@ Hole.archival?                # => true
 
 ### Options
 
+#### `readonly_when_archived`
 When defining an ArchivalRecord model, it is is possible to make it unmodifiable
 when it is archived by passing `readonly_when_archived: true` to the
-`archival_record` call in your model.
+`archival_record` call in your model. The default value of this option is `false`.
 
 ``` ruby
-class CantTouchThis < ActiveRecord::Base
+class CantTouchThis < ApplicationRecord
   archival_record readonly_when_archived: true
 end
 
@@ -125,12 +128,32 @@ record.save                                  # => false
 record.errors.full_messages.first            # => "Cannot modify an archived record."
 ```
 
+#### `archive_dependents`
+When defining an ArchivalRecord model, it is possible to deactivate archiving/unarchiving for `dependent: :destroy` relationships that are tied to ArchivalRecord models by passing `archive_dependents: false` to the `archival_record` call in your model. The default value of this option is `true`.
+
+``` ruby
+class WillArchive < ApplicationRecord
+  archival_record archive_dependents: false
+  has_many :wont_archives, dependent: :destroy
+end
+class WontArchive < ApplicationRecord
+  archival_record
+end
+
+record = WillArchive.create
+wont_archive = record.wont_archives.create
+record.archive!
+
+record.archived?       # => true
+wont_archive.archived? # => false
+```
+
 ### Callbacks
 
 ArchivalRecord models have four additional callbacks to do any necessary cleanup or other processing before and after archiving and unarchiving, and can additionally halt the archive callback chain.
 
 ``` ruby
-class Hole < ActiveRecord::Base
+class Hole < ApplicationRecord
   archival_record
 
   # runs before #archive!
@@ -158,7 +181,11 @@ end
 
 1. This will only work on associations that are dependent destroy. It
 should be trival to change that or make it optional.
-1. If you would like to work on this, you will need to setup sqlite on your development machine. Alternately, you can disable specific dev dependencies in the gemspec and test_helper and ask for help.
+1. If you would like to work on this, you will need to setup sqlite on your development machine. Alternately, you can deactivate specific dev dependencies in the gemspec and test_helper and ask for help.
+
+## Compatibility with ActsAsArchival
+
+For now, the `acts_as_archival` class method can be used, though it will print a deprecation warning. This is to allow users to transition without trouble to this library if they choose to.
 
 ## Testing
 

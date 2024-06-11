@@ -64,6 +64,10 @@ BASE_FIXTURE_CLASSES = %I[
   poly
   readonly_when_archived
   deprecated_warning_archival
+  ignore_dependents_archival
+  ignorable_dependent
+  explicit_act_on_dependents_archival
+  nonignorable_dependent
 ].freeze
 
 RAILS_4_FIXTURE_CLASSES = %I[
