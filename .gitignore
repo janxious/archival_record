@@ -3,7 +3,7 @@
 .bundle
 bin
 vendor/bundle
-.nix-bundler
+gemfiles/vendor/bundle
 *.gem
 gemfiles/*.lock
 pkg/*
