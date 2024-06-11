@@ -20,13 +20,13 @@ Gemfile:
 
 `gem "archival_record"`
 
-Any models you want to be archival should have the columns `archive_number` (String) and `archived_at` (DateTime).
+Any models you want to be archival should have the columns `archive_number` (`String`) and `archived_at` (`DateTime`).
 
 i.e. `rails g migration AddArchivalRecordToPost archive_number archived_at:datetime`
 
 Any dependent-destroy ArchivalRecord model associated to an ArchivalRecord model will be archived with its parent.
 
-_If you're stuck on Rails 4.0x/3x/2x, check out the older tags/branches, which are no longer in active development._
+_If you're stuck on Rails 5x/4x/3x/2x, check out the older tags/branches, which are no longer in active development._
 
 ## Example
 

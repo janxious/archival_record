@@ -50,35 +50,28 @@ def create_test_tables
   load(schema_file) if File.exist?(schema_file)
 end
 
-BASE_FIXTURE_CLASSES = %I[
+FIXTURE_CLASSES = %I[
   another_polys_holder
+  application_record
+  application_record_row
   archival
-  archival_kid
   archival_grandkid
+  archival_kid
   archival_table_name
+  bogus_relation
+  callback_archival
+  deprecated_warning_archival
+  explicit_act_on_dependents_archival
   exploder
+  ignorable_dependent
+  ignore_dependents_archival
   independent_archival
-  missing_archived_at
   missing_archive_number
+  missing_archived_at
+  nonignorable_dependent
   plain
   poly
   readonly_when_archived
-  deprecated_warning_archival
-  ignore_dependents_archival
-  ignorable_dependent
-  explicit_act_on_dependents_archival
-  nonignorable_dependent
-  bogus_relation
-].freeze
-
-RAILS_4_FIXTURE_CLASSES = %I[
-  callback_archival4
-].freeze
-
-RAILS_5_FIXTURE_CLASSES = %I[
-  application_record
-  application_record_row
-  callback_archival5
 ].freeze
 
 def require_test_classes
@@ -86,14 +79,7 @@ def require_test_classes
     inflect.irregular "poly", "polys"
   end
 
-  fixtures = if ActiveRecord::VERSION::MAJOR >= 4
-               RAILS_5_FIXTURE_CLASSES
-             else
-               RAILS_4_FIXTURE_CLASSES
-             end
-
-  fixtures += BASE_FIXTURE_CLASSES
-  fixtures.each { |test_class_file| require_relative "fixtures/#{test_class_file}" }
+  FIXTURE_CLASSES.each { |test_class_file| require_relative "fixtures/#{test_class_file}" }
 end
 
 prepare_for_tests
