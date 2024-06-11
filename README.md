@@ -174,14 +174,12 @@ end
 
 #### Halting the callback chain
 
-* Rails 4.2 - the callback method should return a `false`/`nil` value.
-* Rails 5.x - the callback should `throw(:abort)`/`raise(:abort)`.
+* Rails 6.x+ - the callback should `throw(:abort)`/`raise(:abort)`.
 
 ## Caveats
 
-1. This will only work on associations that are dependent destroy. It
-should be trivial to change that or make it optional.
-1. If you would like to work on this, you will need to setup sqlite on your development machine. Alternately, you can deactivate specific dev dependencies in the gemspec and test_helper and ask for help.
+1. This will only work on associations that are marked `dependent: :destroy`. It should be trivial to change that or make it optional.
+1. If you would like to work on this, you will need to setup sqlite on your development machine. Alternately, you can deactivate specific dev dependencies in the `gemspec` and `test_helper` or ask for help in an issue.
 
 ## Compatibility with ActsAsArchival
 
@@ -201,7 +199,7 @@ Check out [more on appraisal](https://github.com/thoughtbot/appraisal#usage) if 
 
 ## Help Wanted
 
-We'd love to have your help making this better! If you have ideas for features this should implement or you think the code sucks, let us know. And PRs are greatly appreciated. :+1:
+I'd love to have your help making this better! If you have ideas for features this should implement or you think the code sucks, let us know. And PRs are greatly appreciated. :+1:
 
 ## Thanks
 
@@ -213,20 +211,20 @@ ActsAsParanoid and PermanentRecords were both inspirations for this:
 ## Contributors
 
 * Joel Meador
-* Michael Kuehl
-* Matthew Gordon
-* Vojtech Salbaba
-* David Jones
-* Dave Woodward
-* Miles Sterrett
-* James Hill
-* Maarten Claes
-* Anthony Panozzo
 * Aaron Milam
+* Anthony Panozzo
 * Anton Rieder
-* Josh Menden
-* Sergey Gnuskov
+* Dave Woodward
+* David Jones
 * Elijah Miller
+* James Hill
+* Josh Menden
+* Maarten Claes
+* Matthew Gordon
+* Michael Kuehl
+* Miles Sterrett
+* Sergey Gnuskov
+* Vojtech Salbaba
 
 Thanks!
 
