@@ -10,6 +10,7 @@
 * **ADDED** new option for `archival_record` called `archive_dependents` which can control whether `dependent: :destroy` records are archived with their parent
 * lots of cleanup of code, particularly the way `ApplicationRecord` gets patched
 * remove travis-ci, use gitlab pipelines
+* updated all gems that could be updated to latest
 
 ## 2.0.2 - August 4, 2020
 * fixing travis
