@@ -55,9 +55,13 @@ module ArchivalRecordCore
       private def setup_scopes
         scope :archived, -> { where.not(archived_at: nil).where.not(archive_number: nil) }
         scope :unarchived, -> { where(archived_at: nil, archive_number: nil) }
-        scope :archived_from_archive_number, (lambda do |head_archive_number|
-          where(["archived_at IS NOT NULL AND archive_number = ?", head_archive_number])
-        end)
+        scope :archived_from_archive_number,
+              (lambda do |head_archive_number|
+                 table = arel_table
+                 archive_at_check = table[:archived_at].not_eq(nil)
+                 archive_number_check = table[:archive_number].eq(head_archive_number)
+                 where(archive_at_check.and(archive_number_check))
+               end)
       end
 
       private def setup_callbacks
