@@ -47,7 +47,7 @@ module ArchivalRecordCore
         end
 
         def act_on_archivals(_scope)
-          raise NotImplementedError.new("The #{self.class} hasn't implemented 'act_on_archivals(scope)'")
+          raise(NotImplementedError, "The #{self.class} hasn't implemented 'act_on_archivals(scope)'")
         end
 
       end

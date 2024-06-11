@@ -115,7 +115,8 @@ module ArchivalRecordCore
         missing_columns << "archived_at" unless respond_to?(:archived_at)
         return if missing_columns.blank?
 
-        raise MissingArchivalColumnError.new("Add '#{missing_columns.join "', '"}' column(s) to '#{self.class.name}' to make it archival")
+        raise(MissingArchivalColumnError,
+              "Add '#{missing_columns.join "', '"}' column(s) to '#{self.class.name}' to make it archival")
       end
 
       def archived?
@@ -167,7 +168,7 @@ module ArchivalRecordCore
       private def handle_archival_action_exception(exception)
         ActiveRecord::Base.logger.try(:debug, exception.message)
         ActiveRecord::Base.logger.try(:debug, exception.backtrace)
-        raise ActiveRecord::Rollback
+        raise(ActiveRecord::Rollback)
       end
 
     end

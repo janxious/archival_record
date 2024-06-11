@@ -27,7 +27,7 @@ module ArchivalRecordCore
 
       def archive_all!
         error_message = "The #{klass} must implement 'act_on_archivals' in order to call `archive_all!`"
-        raise NotImplementedError.new(error_message) unless archival?
+        raise(NotImplementedError, error_message) unless archival?
 
         head_archive_number = Digest::MD5.hexdigest("#{klass}#{Time.now.utc.to_i}")
         each { |record| record.archive!(head_archive_number) }.tap { reset }
@@ -35,7 +35,7 @@ module ArchivalRecordCore
 
       def unarchive_all!
         error_message = "The #{klass} must implement 'act_on_archivals' in order to call `unarchive_all!`"
-        raise NotImplementedError.new(error_message) unless archival?
+        raise(NotImplementedError, error_message) unless archival?
 
         each(&:unarchive!).tap { reset }
       end

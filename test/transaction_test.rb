@@ -11,7 +11,8 @@ class TransactionTest < ActiveSupport::TestCase
     end
     archival.archive!
 
-    assert_not archival.archived?, "If this failed, you might be trying to test on a system that doesn't support nested transactions"
+    failure_reason = "If this failed, you might be trying to test on a system that doesn't support nested transactions"
+    assert_not archival.archived?, failure_reason
     assert_not exploder.reload.archived?
   end
 

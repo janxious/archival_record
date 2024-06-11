@@ -20,9 +20,6 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundModuleBody:
   EnforcedStyle: empty_lines_except_namespace
 
-Layout/LineLength:
-  Max: 140
-
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: space
 
@@ -55,6 +52,7 @@ Style/Alias:
 Style/AsciiComments:
   Enabled: false
 
+# TODO: class documentation
 Style/Documentation:
   Enabled: false
 
@@ -69,9 +67,10 @@ Style/FrozenStringLiteralComment:
 
 Style/HashSyntax:
   EnforcedStyle: ruby19
+  EnforcedShorthandSyntax: always
 
 Style/RaiseArgs:
-  EnforcedStyle: compact
+  EnforcedStyle: exploded
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

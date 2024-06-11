@@ -34,7 +34,7 @@ class RelationsTest < ActiveSupport::TestCase
     assert parents.first.archivals.last.archived?
   end
 
-  test "unarchive_all! unarchives all records in an AR Assocation" do
+  test "unarchive_all! unarchives all records in an AR association" do
     3.times { Archival.create! }
 
     archivals = Archival.all
