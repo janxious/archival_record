@@ -3,26 +3,27 @@ $LOAD_PATH.push File.expand_path("lib", __dir__)
 require "archival_record/version"
 
 Gem::Specification.new do |gem|
-  gem.name        = "archival_record"
-  gem.summary     = "Atomic archiving/unarchiving for ActiveRecord"
-  gem.version     = ArchivalRecord::VERSION
-  gem.authors     = ["Joel Meador",
-                     "Michael Kuehl",
-                     "Matthew Gordon",
-                     "Vojtech Salbaba",
-                     "David Jones",
-                     "Dave Woodward",
-                     "Miles Sterrett",
-                     "James Hill",
-                     "Maarten Claes",
-                     "Anthony Panozzo",
-                     "Aaron Milam",
-                     "Anton Rieder",
-                     "Josh Menden",
-                     "Sergey Gnuskov",
-                     "Elijah Miller"]
-  gem.email       = ["joel.meador+archival_record@gmail.com"]
-  gem.homepage    = "https://gitlab.com/joelmeador/archival_record/"
+  gem.name     = "archival_record"
+  gem.summary  = "Atomic archiving/unarchiving for ActiveRecord"
+  gem.version  = ArchivalRecord::VERSION
+  gem.authors  = ["Joel Meador",
+                  "Michael Kuehl",
+                  "Matthew Gordon",
+                  "Vojtech Salbaba",
+                  "David Jones",
+                  "Dave Woodward",
+                  "Miles Sterrett",
+                  "James Hill",
+                  "Maarten Claes",
+                  "Anthony Panozzo",
+                  "Aaron Milam",
+                  "Anton Rieder",
+                  "Josh Menden",
+                  "Sergey Gnuskov",
+                  "Elijah Miller"]
+  gem.email    = ["joel.meador+archival_record@gmail.com"]
+  gem.homepage = "https://gitlab.com/joelmeador/archival_record/"
+  gem.licenses = ['MIT']
 
   gem.files = `git ls-files`.split("\n")
   gem.require_paths = ["lib"]
