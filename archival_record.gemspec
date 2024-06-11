@@ -24,19 +24,22 @@ Gem::Specification.new do |gem|
   gem.email       = ["joel.meador+archival_record@gmail.com"]
   gem.homepage    = "https://gitlab.com/joelmeador/archival_record/"
 
-  gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.files = `git ls-files`.split("\n")
   gem.require_paths = ["lib"]
-  gem.required_ruby_version = ">= 2.4"
+  gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "activerecord", ">= 5.0"
+  gem.add_dependency("activerecord", ">= 6.0")
 
-  gem.add_development_dependency "appraisal"
-  gem.add_development_dependency "database_cleaner"
-  gem.add_development_dependency "rake"
-  gem.add_development_dependency "rr"
-  gem.add_development_dependency "rubocop"
-  gem.add_development_dependency "sqlite3"
+  # rubocop:disable Gemspec/DevelopmentDependencies
+  gem.add_development_dependency("appraisal")
+  gem.add_development_dependency("database_cleaner")
+  gem.add_development_dependency("rake")
+  gem.add_development_dependency("rr")
+  gem.add_development_dependency("rubocop")
+  gem.add_development_dependency("rubocop-rails")
+  gem.add_development_dependency("rubocop-rake")
+  gem.add_development_dependency("sqlite3", "< 2")
+  # rubocop:enable Gemspec/DevelopmentDependencies
 
   gem.description =
     <<~DESCRIPTION
@@ -48,4 +51,5 @@ Gem::Specification.new do |gem|
 
       Additionally, other plugins generally change how destroy/delete work. ArchivalRecord does not, and thus one can destroy records like normal.
     DESCRIPTION
+  gem.metadata["rubygems_mfa_required"] = "true"
 end

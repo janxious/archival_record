@@ -3,8 +3,11 @@
 .bundle
 bin
 vendor/bundle
+.nix-bundler
 *.gem
 gemfiles/*.lock
 pkg/*
 .DS_Store
 *.sqlite3
+*.sqlite3-shm
+*.sqlite3-wal

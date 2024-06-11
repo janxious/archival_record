@@ -23,7 +23,7 @@ class PolymorphicTest < ActiveSupport::TestCase
   test "unarchive item with polymorphic association" do
     archive_attributes = {
       archive_number: "test",
-      archived_at: Time.now
+      archived_at: Time.now.utc
     }
     archival = Archival.create!(archive_attributes)
     poly = archival.polys.create!(archive_attributes)
@@ -36,7 +36,7 @@ class PolymorphicTest < ActiveSupport::TestCase
   test "does not unarchive polymorphic association of different item with same id" do
     archive_attributes = {
       archive_number: "test",
-      archived_at: Time.now
+      archived_at: Time.now.utc
     }
 
     archival = Archival.create!(archive_attributes)

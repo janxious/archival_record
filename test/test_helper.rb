@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__) + "/../lib")
+$LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
 
 require "bundler/setup"
 require "minitest/autorun"
@@ -20,7 +20,7 @@ end
 
 def setup_logging
   require "logger"
-  logfile = File.dirname(__FILE__) + "/debug.log"
+  logfile = "#{File.dirname(__FILE__)}/debug.log"
   ActiveRecord::Base.logger = Logger.new(logfile)
 end
 
@@ -40,8 +40,11 @@ def sqlite_config
   }
 end
 
+def schema_file
+  "#{File.dirname(__FILE__)}/schema.rb"
+end
+
 def create_test_tables
-  schema_file = File.dirname(__FILE__) + "/schema.rb"
   puts "** Loading schema for SQLite"
   ActiveRecord::Base.establish_connection(sqlite_config)
   load(schema_file) if File.exist?(schema_file)
@@ -64,13 +67,13 @@ BASE_FIXTURE_CLASSES = %I[
 ].freeze
 
 RAILS_4_FIXTURE_CLASSES = %I[
-  callback_archival_4
+  callback_archival4
 ].freeze
 
 RAILS_5_FIXTURE_CLASSES = %I[
   application_record
   application_record_row
-  callback_archival_5
+  callback_archival5
 ].freeze
 
 def require_test_classes
