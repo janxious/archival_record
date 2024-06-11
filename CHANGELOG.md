@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.0.1 - June 10, 2024
+* a few more tidying items like fixing up some raw sql in a query to be arel
+* changing a logging method to use error instead of debug so it surfaces more easily
+
 ## 3.0.0 - June 10, 2024
 * **BREAKING CHANGE** Drop support for rails 5 - see `rails__4.x-and-5.x` branch for relevant code
 * **BREAKING CHANGE** Drop support for Ruby 2.x
