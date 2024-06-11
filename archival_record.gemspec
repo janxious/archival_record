@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
                   "Elijah Miller"]
   gem.email    = ["joel.meador+archival_record@gmail.com"]
   gem.homepage = "https://gitlab.com/joelmeador/archival_record/"
-  gem.licenses = ['MIT']
+  gem.licenses = ["MIT"]
 
   gem.files = `git ls-files`.split("\n")
   gem.require_paths = ["lib"]
