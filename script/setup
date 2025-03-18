@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-cd "`dirname \"$0\"`/.."
-
-echo "\n---=== Bundling ===---"
-bundle install
-
-echo "\n---=== Setting up various rails versions for testing ===---"
-bundle exec appraisal install
